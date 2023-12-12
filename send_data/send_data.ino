@@ -25,8 +25,8 @@ HardwareSerial SerialPort(2);
 #define API_KEY "AIzaSyBFXji0tc6nLJfv-NFcuKod-IHU-5jTZX8"
 
 // Insert Authorized Email and Corresponding Password
-#define USER_EMAIL "18221001@std.stei.itb.ac.id"
-#define USER_PASSWORD "Wanazis111202"
+#define USER_EMAIL "itbshuttletracker@gmail.com"
+#define USER_PASSWORD "itbshuttletracker1920"
 
 // Insert RTDB URLefine the RTDB URL
 #define DATABASE_URL "https://esp32-firebase-demo-f2551-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -165,7 +165,7 @@ void setup() {
   Serial.println(uid);
 
   // Update database path
-  databasePath = "/ShuttleData/" + uid;
+  databasePath = "/ShuttleData/" + uid + "/Rute1/Bus1";
 
   // Update database path for sensor readings
   mhsPath = databasePath + "/countMhs";
@@ -198,8 +198,8 @@ void loop() {
   }
 
   //Read location
-  if (SerialGPS.available() > 0) {
-    while (SerialGPS.available() > 0) {
+  if (SerialGPS.available()) {
+    while (SerialGPS.available()) {
       if (gps.encode(SerialGPS.read())) {
         // If valid data is available, print the GPS information
         if (gps.location.isValid()) {
@@ -217,8 +217,9 @@ void loop() {
   }
 
   //Send to database
-  if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)){
-    sendDataPrevMillis = millis();
+  // && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)
+  if (Firebase.ready()){
+    // sendDataPrevMillis = millis();
 
     // Send readings to database:
     sendInt(mhsPath, countMhs);
