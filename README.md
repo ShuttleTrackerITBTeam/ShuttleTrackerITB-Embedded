@@ -1,5 +1,8 @@
 # ShuttleTrackerITB-Embedded
 
+- Gambar Rangkaian
+![Casing](design/Rangkaian.png)
+
 - Tampilan Casing
 ![Casing](design/Casing.png)
 
